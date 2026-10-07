@@ -1,0 +1,9 @@
+@import "../styles.scss";
+
+.body {
+  @apply p-4;
+}
+
+.container {
+  @apply flex flex-col bg-gray-300 p-4 rounded-md; 
+}
