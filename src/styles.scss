@@ -1,3 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+.form {
+    @apply w-fit flex flex-col py-2 space-y-2 border border-black rounded-md;
+  
+    &--group {
+      @apply flex flex-row gap-6 px-4 py-2 items-start ;
+    }
+    &--label {
+      @apply font-medium w-[200px];
+    }
+    &--input {
+      @apply border border-gray-500 rounded-md p-2 w-[300px];
+    }
+  }
