@@ -1,0 +1,121 @@
+<section class="flex flex-col gap-2 !w-full">
+    <div class="flex flex-row justify-between">
+        <h1 class="text-2xl font-semibold">Form Array</h1>
+        @let isFormValid = experienceForm().valid() || !experienceModel().experiences.length;
+
+        @if (isFormValid) {
+        <button class="py-2 px-3 bg-white rounded-xl cursor-pointer"
+            (click)="addNewExperience()"
+            [disabled]="!isFormValid"
+        >Add New Experience</button>
+        }
+    </div>
+    @if (experienceModel().experiences.length) {
+        <form class="flex flex-col gap-2 w-full">
+            @let experience = experienceForm.experiences;
+            @for (experienceForm of experience; track $index) {
+                <div class="form px-2 !w-full">
+                    <div class="flex flex-row justify-between px-3 items-center border-b pb-2">
+                        <h2>Experience {{$index + 1}}</h2>
+                        <button class="py-1 px-3 bg-white rounded-xl cursor-pointer" (click)="$event.preventDefault(); removeExperience($index)">Delete</button>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <div class="form--group">
+                            <label class="form--label" for="name">First Name</label>
+                            <div class="flex flex-col">
+                              @let name = experience[$index].name;
+                              @let showNameError = name().touched() && name().invalid();
+                              <input class="form--input" type="text" id="name"  placeholder="Job Name"
+                              [formField]="name"
+                              />
+                              @if (showNameError) {
+                                @for (error of name().errors(); track error.kind) {
+                                  <span class="form--input-error">
+                                    {{ error.message }}
+                                  </span>
+                                }
+                              }
+                            </div>
+                        </div>
+                        <div class="form--group">
+                            <label class="form--label" for="companyName">Company Name</label>
+                            <div class="flex flex-col">
+                              @let companyName = experience[$index].companyName;
+                              @let showCompanyNameError = companyName().touched() && companyName().invalid();
+                              <input class="form--input" type="text" id="companyName"  placeholder="Company Name..." [formField]="companyName" />
+                              @if (showCompanyNameError) {
+                                @for (error of companyName().errors(); track error.kind) {
+                                  <span class="form--input-error">
+                                    {{ error.message }}
+                                  </span>
+                                }
+                              }
+                            </div>
+                        </div>
+                        <div class="form--group">
+                            <label class="form--label" for="textarea">Description</label>
+                            <div class="flex flex-col">
+                              @let description = experience[$index].description;
+                              @let showDescriptionError = description().touched() && description().invalid();
+                              <textarea class="form--input" type="textarea" id="textarea"  placeholder="Short Description about the job"
+                              rows="3"
+                              [formField]="description"
+                              ></textarea>
+                              @if (showDescriptionError) {
+                                @for (error of description().errors(); track error.kind) {
+                                  <span class="form--input-error">
+                                    {{ error.message }}
+                                  </span>
+                                }
+                              }
+                            </div>
+                        </div>
+                        <div class="form--group">
+                            <label class="form--label" for="startDate">Start Date</label>
+                            <div class="flex flex-col">
+                              @let startDate = experience[$index].startDate;
+                              @let showStartDateError = startDate().touched() && startDate().invalid();
+                              <input class="form--input" type="date" id="startDate"  placeholder="Company Name..." [formField]="startDate" format="DD-MM-YYYY"/>
+                              @if (showStartDateError) {
+                                @for (error of startDate().errors(); track error.kind) {
+                                  <span class="form--input-error">
+                                    {{ error.message }}
+                                  </span>
+                                }
+                              }
+                            </div>
+                        </div>
+                        <div class="form--group">
+                            <label class="form--label" for="stillWorking">Still Working</label>
+                            <div class="flex flex-col">
+                              @let stillWorking = experience[$index].stillWorking;
+                              <input class="form--input" type="checkbox" id="stillWorking" [formField]="stillWorking" />
+                            </div>
+                        </div>
+                        @if (!experience[$index].endDate().hidden()) {
+                          <div class="form--group">
+                              <label class="form--label" for="endDate">End Date</label>
+                              <div class="flex flex-col">
+                                @let endDate = experience[$index].endDate;
+                                @let showEndDateError = endDate().touched() && endDate().invalid();
+                                <input class="form--input" type="date" id="endDate"  placeholder="Company Name..." [formField]="endDate" format="DD-MM-YYYY"/>
+                                @if (showEndDateError) {
+                                  @for (error of endDate().errors(); track error.kind) {
+                                    <span class="form--input-error">
+                                      {{ error.message }}
+                                    </span>
+                                  }
+                                }
+                              </div>
+                          </div>
+                        }
+                    </div>
+                </div>
+            }
+        </form>
+    }
+    <div class="flex flex-col gap-2 mt-2">
+        <pre>Form Valid: {{ experienceForm().valid() }}</pre>
+        <pre>Form Data: {{ experienceModel() | json }}</pre>
+      </div>
+</section>

@@ -1,5 +1,21 @@
-<section class="body">
+<section class="body flex flex-col gap-2">
+  <div class="flex flex-row gap-2">
+    @for (item of navItems(); track item.id) {
+      <div class="py-2 px-3 cursor-pointer rounded-xl" [ngClass]="item.id === selectTab().id ? 'bg-red-700 text-white text-bold' : 'bg-gray-100'"
+        (click)="selectTab.set(item)"
+      >
+        {{ item.label }}
+      </div>
+    }
+  </div>
   <section class="container">
-    <app-simple-form></app-simple-form>
+    @switch(selectTab().id) {
+      @case(tabIdEnum().SIMPLE) {
+        <app-simple-form></app-simple-form>
+      }
+      @case (tabIdEnum().ARRAY) {
+        <app-array-form></app-array-form>
+      }
+    }
   </section>
 </section>
