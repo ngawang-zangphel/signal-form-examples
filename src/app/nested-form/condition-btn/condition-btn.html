@@ -1,0 +1,15 @@
+@let isAnd = value() === andOrConditionEnum().AND;
+<div class="flex flex-row justify-between items-center w-fit gap-4 py-1 px-2 bg-gray-200 rounded-3xl">
+    <span class="cursor-default">IF</span>
+    @let isSelected = 'bg-red-600 text-white';
+    @let isNotSelected = 'bg-white text-black';
+    <div class="flex flex-row bg-white py-1 px-1 rounded-3xl cursor-pointer items-center justify-center">
+        <span class="rounded-3xl px-4 py-1" [class]="isAnd ? isSelected : isNotSelected" (click)="value.set(andOrConditionEnum().AND)">
+            And
+        </span>
+        <span class="text-black rounded-3xl px-4 py-1" [class]="isAnd ? isNotSelected : isSelected" (click)="value.set(andOrConditionEnum().OR)">
+            Or
+        </span>
+    </div>
+</div>
+    

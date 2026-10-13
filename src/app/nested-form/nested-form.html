@@ -1,1 +1,56 @@
-<p>nested-form works!</p>
+<section class="flex flex-col gap-2 !w-full">
+    <div class="flex flex-row justify-between">
+        <h1 class="text-2xl font-semibold">Nested Form</h1>
+    </div>
+    <div>
+        <form class="form !w-full">
+            <div class="form--group !w-full">
+                <label class="form--label" for="name">Rule Name</label>
+                <div class="flex flex-col !w-full">
+                  @let ruleName = ruleForm.name;
+                  @let showRuleNameError = ruleName().touched() && ruleName().invalid();
+                  <input class="form--input !w-full" type="text" id="name"  placeholder="Rule Name..." [formField]="ruleName" />
+                  @if (showRuleNameError) {
+                    @for (error of ruleName().errors(); track error.kind) {
+                      <span class="form--input-error">
+                        {{ error.message }}
+                      </span>
+                    }
+                  }
+                </div>
+            </div>
+            <div class="form--group !w-full">
+                <label class="form--label" for="description">Description</label>
+                <div class="flex flex-col !w-full">
+                  @let description = ruleForm.description;
+                  @let showDescriptionNameError = description().touched() && description().invalid();
+                  <textarea 
+                    class="form--input !w-full" type="text" id="description"  placeholder="Description..." [formField]="description"
+                    rows="4"
+                ></textarea>
+                  @if (showDescriptionNameError) {
+                    @for (error of description().errors(); track error.kind) {
+                      <span class="form--input-error">
+                        {{ error.message }}
+                      </span>
+                    }
+                  }
+                </div>
+            </div>
+            <div class="flex flex-col mx-4 pt-4 border-t gap-4">
+                <div class="flex flex-row justify-between items-center">
+                    <h2>Rule</h2>
+                </div>
+                <section class="flex flex-row justify-between items-center w-full">
+                    <app-condition-action-header class="!w-full" [condition]="ruleForm.rule.condition" (addNewRule)="addNewRule()" (addNewSubGroup)="addNewSubGroup()"
+                    [hiddenBtn]="[actionBtnEnum().REMOVE_GROUP]" />
+                </section>
+            </div>
+            
+        </form>
+    </div>
+    <div class="flex flex-col gap-2 mt-2">
+        <pre>Form Valid: {{ ruleForm().valid() }}</pre>
+        <pre>Form Data: {{ ruleFormModel() | json }}</pre>
+    </div>
+</section>

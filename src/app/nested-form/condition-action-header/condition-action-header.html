@@ -1,0 +1,16 @@
+
+<section class="flex flex-row justify-between items-center w-full">
+    <app-condition-btn [formField]="condition()" />
+
+    <div class="flex flex-row gap-2">
+        @if (!hiddenBtn().includes(actionBtnEnum().ADD_RULE)) {
+            <button type="button" class="py-2 px-3 bg-white rounded-xl cursor-pointer" (click)="addNewRule.emit()">+ Add Rule</button>
+        }
+        @if (!hiddenBtn().includes(actionBtnEnum().ADD_SUB_GROUP)) {
+            <button type="button" class="py-2 px-3 bg-white rounded-xl cursor-pointer" (click)="addNewSubGroup.emit()">+ Add SubGroup</button>
+        }
+        @if (!hiddenBtn().includes(actionBtnEnum().REMOVE_GROUP)) {
+            <button type="button" class="py-2 px-3 bg-white rounded-xl cursor-pointer" (click)="removeCondition.emit()">- Remove Group</button>
+        }
+    </div>
+</section>
