@@ -4,9 +4,10 @@ import { form, FormField } from '@angular/forms/signals';
 import { FormGroup } from './form-group/form-group';
 import { AndOrConditionEnum, RuleFormGroupType, RuleConditionType, RuleGroupType, ConditionActionHeaderBtnEnum } from './form.interface';
 import { ConditionActionHeader } from './condition-action-header/condition-action-header';
+import { ConditionForm } from './condition-form/condition-form';
 
 @Component({
-  imports: [JsonPipe, FormField, FormGroup, ConditionActionHeader],
+  imports: [JsonPipe, FormField, FormGroup, ConditionActionHeader, ConditionForm],
   selector: 'app-nested-form',
   styleUrl: './nested-form.scss',
   templateUrl: './nested-form.html',

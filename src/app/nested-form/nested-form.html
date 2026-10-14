@@ -47,6 +47,9 @@
                     @for (group of ruleForm.rule.groups; track $index) {
                       <app-form-group [ruleGroup]="group" (removeCondition)="removeFormGroup($index)"></app-form-group>
                     }
+                    @for (rule of ruleForm.rule.rules; track $index) {
+                      <app-condition-form></app-condition-form>
+                    }
                 </section>
             </div>
             
