@@ -2,12 +2,11 @@ import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { FormGroup } from './form-group/form-group';
-import { ConditionBtn } from './condition-btn/condition-btn';
 import { AndOrConditionEnum, RuleFormGroupType, RuleConditionType, RuleGroupType, ConditionActionHeaderBtnEnum } from './form.interface';
 import { ConditionActionHeader } from './condition-action-header/condition-action-header';
 
 @Component({
-  imports: [JsonPipe, FormField, FormGroup, ConditionBtn, ConditionActionHeader],
+  imports: [JsonPipe, FormField, FormGroup, ConditionActionHeader],
   selector: 'app-nested-form',
   styleUrl: './nested-form.scss',
   templateUrl: './nested-form.html',
@@ -40,6 +39,10 @@ export class NestedForm {
 
   addNewSubGroup(): void {
     this.ruleFormModel.update(state => ({...state, rule: {...state.rule, groups: [...state.rule.groups, this.newGroup()]}}))
+  }
+
+  removeFormGroup(index: number): void {
+    this.ruleFormModel.update(state => ({...state, rule: {...state.rule, groups: state.rule.groups.filter((_, i) => i !== index)}}));
   }
 
   protected newRule(): RuleConditionType {

@@ -41,9 +41,12 @@
                 <div class="flex flex-row justify-between items-center">
                     <h2>Rule</h2>
                 </div>
-                <section class="flex flex-row justify-between items-center w-full">
+                <section class="w-full">
                     <app-condition-action-header class="!w-full" [condition]="ruleForm.rule.condition" (addNewRule)="addNewRule()" (addNewSubGroup)="addNewSubGroup()"
                     [hiddenBtn]="[actionBtnEnum().REMOVE_GROUP]" />
+                    @for (group of ruleForm.rule.groups; track $index) {
+                      <app-form-group [ruleGroup]="group" (removeCondition)="removeFormGroup($index)"></app-form-group>
+                    }
                 </section>
             </div>
             

@@ -16,7 +16,7 @@ export class ConditionActionHeader {
 
   addNewRule = output<void>();
   addNewSubGroup = output<void>();
-  removeCondition = output<void>();
+  remove = output<void>();
 
   actionBtnEnum = signal(ConditionActionHeaderBtnEnum);
 

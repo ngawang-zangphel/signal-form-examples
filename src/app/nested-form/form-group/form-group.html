@@ -1,20 +1,13 @@
-<section class="flex flex-row justify-between items-center w-full">
-    <div class="flex flex-row justify-between items-center w-fit gap-4 py-1 px-2 bg-gray-200 rounded-3xl">
-        <span class="cursor-default">IF</span>
-        @let isSelected = 'bg-red-600 text-white';
-        @let isNotSelected = 'bg-white text-black';
-        <div class="flex flex-row bg-white py-1 px-1 rounded-3xl cursor-pointer items-center justify-center">
-            <div class="rounded-3xl px-4 py-1" [class]="isNotSelected">
-                And
+<section class="mx-2 my-3 p-2 border rounded-xl">
+    <app-condition-action-header [condition]="ruleGroup().condition" (addNewSubGroup)="addNewSubGroup()" (addNewRule)="addNewRule()"(remove)="removeCondition.emit()"/>
+    <div class="flex flex-col gap-2">
+        @for (group of ruleGroup().groups; track $index) {
+            <app-form-group [ruleGroup]="group" (removeCondition)="removeSubFormGroup($index)"></app-form-group>
+        }
+        @for (rule of ruleGroup().rules; track $index) {
+            <div>
+                <app-condition-form></app-condition-form>
             </div>
-            <div class="text-black rounded-3xl px-4 py-1" [class]="isSelected">
-                Or
-            </div>
-        </div>
+        }
     </div>
-    <div class="flex flex-row gap-2">
-        <button class="py-2 px-3 bg-white rounded-xl cursor-pointer">+ Add Rule</button>
-        <button class="py-2 px-3 bg-white rounded-xl cursor-pointer">+ Add SubGroup</button>
-        <button class="py-2 px-3 bg-white rounded-xl cursor-pointer">- Remove Group</button>
-    </div>
-</section>
+</section>                
