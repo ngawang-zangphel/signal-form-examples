@@ -41,5 +41,5 @@ export class App {
 
   readonly tabIdEnum = signal(TabIdEnum);
 
-  protected selectTab = signal<NavItem>(this.navItems()[2]);
+  protected selectTab = signal<NavItem>(this.navItems()[0]);
 }
